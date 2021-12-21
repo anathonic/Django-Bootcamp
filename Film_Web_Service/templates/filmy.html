@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'nowy.css' %}">
+    <title>Document</title>
+</head>
+<body>
+        <a href="{% url 'nowy_film' %}">Dodaj nowy film</a>
+        {% if filmy|length == 0 %}
+        <h2>Brak filmów</h2>
+        {% else %}
+            <h2>Ilość filmów w BD: {{filmy | length }}</h2>
+
+    {% for film in filmy %}
+        <h2>{{ film }}</h2>
+        <p>{{ film.description }}</p>
+        <a href="{% url 'edit' film.id %}">Edytuj</a>
+        <br>
+        <a href="{% url 'delete' film.id %}">Usun</a>
+{% endfor %}
+{% endif %}
+</body>
+</html>
